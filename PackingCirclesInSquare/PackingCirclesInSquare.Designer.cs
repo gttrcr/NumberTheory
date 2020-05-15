@@ -30,6 +30,7 @@
         {
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.checkBoxDraw = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,17 +53,29 @@
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
             // 
+            // checkBoxDraw
+            // 
+            this.checkBoxDraw.AutoSize = true;
+            this.checkBoxDraw.Location = new System.Drawing.Point(1054, 14);
+            this.checkBoxDraw.Name = "checkBoxDraw";
+            this.checkBoxDraw.Size = new System.Drawing.Size(62, 21);
+            this.checkBoxDraw.TabIndex = 2;
+            this.checkBoxDraw.Text = "Draw";
+            this.checkBoxDraw.UseVisualStyleBackColor = true;
+            // 
             // PackingCirclesInSquare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1403, 833);
+            this.Controls.Add(this.checkBoxDraw);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.pictureBox);
             this.Name = "PackingCirclesInSquare";
             this.Text = "PackingCirclesInSquare";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -70,6 +83,7 @@
 
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Button buttonStart;
+        private System.Windows.Forms.CheckBox checkBoxDraw;
     }
 }
 

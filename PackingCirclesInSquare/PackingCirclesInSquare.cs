@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PackingCirclesInSquare
 {
     public partial class PackingCirclesInSquare : Form
     {
-        private static double scale = 1000;
+        private static readonly double scale = 1190;
 
         public PackingCirclesInSquare()
         {
@@ -31,6 +33,11 @@ namespace PackingCirclesInSquare
                 X = x;
                 Y = y;
             }
+
+            public double Distance(PointD pointD)
+            {
+                return Math.Sqrt(Math.Pow(pointD.X - X, 2) + Math.Pow(pointD.Y - Y, 2));
+            }
         }
 
         private struct PackProperties
@@ -52,7 +59,7 @@ namespace PackingCirclesInSquare
             packProperties = new List<PackProperties>();
             string folder = "..\\..\\csq_coords\\";
             string[] radii = File.ReadAllLines(folder + "radii.txt");
-            for (int i = 19; i < 20; i++)
+            for (int i = 3100; i < radii.Length; i++)
             {
                 string[] split = radii[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                 int numberOfCircles = Convert.ToInt32(split[0]);
@@ -95,22 +102,40 @@ namespace PackingCirclesInSquare
             int height = pictureBox.Height;
             int width = pictureBox.Width;
 
+            Dictionary<int, int> exagonalPack = new Dictionary<int, int>();
             for (int i = 0; i < packProperties.Count; i++)
             {
-                for (int c = 0; c < packProperties[i].CirclesCenter.Count; c++)
-                {
-                    Circle(packProperties[i].CirclesCenter[c].X, packProperties[i].CirclesCenter[c].Y, packProperties[i].CircleRadius, height, width, graphics);
+                //Draw every circle
+                //for (int c = 0; c < packProperties[i].CirclesCenter.Count; c++)
+                //    Circle(packProperties[i].CirclesCenter[c].X, packProperties[i].CirclesCenter[c].Y, packProperties[i].CircleRadius, height, width, graphics);
 
-                    for (int a = 0; a < packProperties[i].CirclesCenter.Count; a++)
+                //Draw every reference points
+                //for (int a = 0; a < packProperties[i].CirclesCenter.Count; a++)
+                Parallel.For(0, packProperties[i].CirclesCenter.Count, a =>
+                {
+                    for (int n = 0; n < 6; n++)
                     {
-                        for (int n = 0; n < 6; n++)
+                        PointD center = new PointD(packProperties[i].CirclesCenter[a].X + 2 * packProperties[i].CircleRadius * Math.Cos(Math.PI / 6 + n * Math.PI / 3), packProperties[i].CirclesCenter[a].Y + 2 * packProperties[i].CircleRadius * Math.Sin(Math.PI / 6 + n * Math.PI / 3));
+                        //Point(center.X, center.Y, height, width, graphics);
+                        List<PointD> orderedList = packProperties[i].CirclesCenter.FindAll(x => x.Distance(center) < Math.Pow(10, -4));
+                        if (orderedList.Count == 1)
                         {
-                            PointD center = new PointD(packProperties[i].CirclesCenter[a].X + 2 * packProperties[i].CircleRadius * Math.Cos(Math.PI / 6 + n * Math.PI / 3), packProperties[i].CirclesCenter[a].Y + 2 * packProperties[i].CircleRadius * Math.Sin(Math.PI / 6 + n * Math.PI / 3));
-                            Point(center.X, center.Y, height, width, graphics);
+                            if (exagonalPack.ContainsKey(packProperties[i].NumberOfCircles))
+                                exagonalPack[packProperties[i].NumberOfCircles]++;
+                            else
+                                exagonalPack.Add(packProperties[i].NumberOfCircles, 1);
                         }
+                        else if (orderedList.Count > 1)
+                            throw new Exception("More than one circles candidate");
                     }
-                }
+                });
             }
+
+            string output = "";
+            for (int i = 0; i < exagonalPack.Count; i++)
+                output += exagonalPack.ElementAt(i).Key + " " + exagonalPack.ElementAt(i).Value + Environment.NewLine;
+
+            File.WriteAllText("output.txt", output);
         }
     }
 }
