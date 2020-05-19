@@ -5,8 +5,6 @@
 #include<iomanip>
 #include<algorithm>
 
-//using namespace std;
-
 const int base = 1000000000;
 const int base_digits = 9;
 
