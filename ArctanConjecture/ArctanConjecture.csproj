@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E9CA9B13-E8FB-454A-90C5-D16A14EA2AD1}</ProjectGuid>
+    <ProjectGuid>{122CBE57-4EFF-4F51-ACE0-7BEB879F8EE1}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GilbreathConsole</RootNamespace>
-    <AssemblyName>GilbreathConsole</AssemblyName>
+    <RootNamespace>ArctanConjecture</RootNamespace>
+    <AssemblyName>ArctanConjecture</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

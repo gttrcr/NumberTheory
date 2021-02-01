@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E9CA9B13-E8FB-454A-90C5-D16A14EA2AD1}</ProjectGuid>
+    <ProjectGuid>{D444A20F-372A-4AF8-A066-5620451D0B70}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GilbreathConsole</RootNamespace>
-    <AssemblyName>GilbreathConsole</AssemblyName>
+    <RootNamespace>SkewesNumber</RootNamespace>
+    <AssemblyName>SkewesNumber</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,6 +48,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WolframLink\WolframLink.csproj">
+      <Project>{4b855384-0b5e-4d41-89c2-000f9edbf7f5}</Project>
+      <Name>WolframLink</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ml32i4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
